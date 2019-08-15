@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<pre>
+刚开始创建ftp连接的时候，使用的是filezilla，但是显示:不支持非ascii字符
+后来换了ftp软件Cyberduck，可以使用了。原因是软件发送数据发了非ascii字符
+
+
+
+
+第一：查看所有用户：
+
+cat /etc/passwd | cut -f 1 -d:
+
+for entire group list use
+cut -d: -f1 /etc/group
+
+
+chown root ./abc ： 改变abc目录的所有者是root。
+</pre>
+
+</body>
+</html>

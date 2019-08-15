@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>linux中apache服务器的使用</title>
+	<meta charset="utf-8" />
+	<link href="./css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<h1>linux中apache服务器的使用</h1>
+
+	<pre>
+
+linux是否安装了apcahe
+ httpd -v
+ service httpd status
+ service httpd start/restart/status/stop
+ 能看到Apache Test page就可以了。然后怎么显示hello world呢。
+
+ 然后打开 
+ /etc/httpd/conf.d/welcome.conf 重命名 welcome.conf 
+ 然后在 目录 /var/www/html/ 下创建index.html即可
+ 
+
+
+</pre>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<html>
+
+<head>
+  <title>python如何创建类，如何因为类和使用类方法，以及静态方法和示例方法的写法</title>
+  <meta charset="utf-8" />
+  <link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <h1>python如何创建类，如何因为类和使用类方法，以及静态方法和示例方法的写法</h1>
+  <p>python class 以及static method
+    <p>
+      <p>创建一个文件 Common.py 里面写入下面的</p>
+      <pre>
+        class AllPaths:
+            @staticmethod
+            def album_work_directory(album_directory):
+                album_path = "one path"
+                if len(album_path) > 0:
+                    album_path = album_directory + album_path
+                    return album_path
+                else:
+                    print("需要传入bbabox绝对路径")
+                    return ""
+     </pre>
+      <p>也就是静态方法要以@staticmethod开头。</p>
+      <p>其它文件中如何引入呢</p>
+      <pre>
+from Common import AllPaths
+
+work_paths = AllPaths()
+
+      </pre>
+      <p>关于python的静态方法：如果python一个函数里面没有self,那么可能会按静态方法执行，因为编译器认为函数里面如果没有self 那么可能是静态方法</p>
+      <p>如何即可！嘿嘿嘿嘿</p>
+
+
+
+</body>
+
+</html>

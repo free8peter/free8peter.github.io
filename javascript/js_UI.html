@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>前端UI的一些东西</title>
+</head>
+<body>
+<pre>
+rem
+root elment 这个常常用来做多端适配的
+用法：
+html,body{font-size:100px}
+其他元素可以写: 0.2rem 这样的话 大小其实就是 100px * 0.2 = 其实就是20像素
+
+box-sizing: border-box;
+这个是css3加的 border-box的时候，盒子就是定义的这么大，而不需要加上padding,border.计算的时候更简单
+
+  
+</pre>
+<p>@media screen用法：一般@media screen and ...</p>
+<pre>
+  @media screen and (min-width: 360px) {
+  html {
+      font-size: 80px;
+  }
+  上面意思是 屏幕宽度最小是360px的时候，Html里面所有的font-size是80px
+
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+not all {
+    .border-top:before,
+    .border-bottom:after {
+        -webkit-transform: scaleY(0.5);
+                transform: scaleY(0.5);
+    }
+  }
+  only 加了限制条件，表示只有下面标识出来的才做处理。
+  -webkit-min-device-pixel-ratio 屏幕实际值和逻辑像素值的比率。
+  iphone 1代是1 iphone4 5 6是2 ，IPhoneplus是3
+}</pre>
+
+
+</body>
+</html>
+

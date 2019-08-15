@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>关于SQL Alchemy</title>
+  <link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <h1>SQLAlchemy的简单使用，增删改查的实现</h1>
+  试了一下SQLAlchemy这个工具，的确，非常不错，简单的几个操作，可以做到：<br>
+  1.不在关心SQL语句；<br>
+  2.重点是object relastionship <br>
+  所以才是不错的关系数据库<br>
+  <br>
+  详细：<br>
+  不需要建表<br>
+  <br>
+  需要注意的：<br>
+  1.需要安装mysql,并在sql里面建对应的用户名等来操作数据库。
+  2.需要python库 pymysql 所以需要pip install ...<br>
+  3.必须commit才能保存到数据库里面。<br>
+  代码如下
+  <pre>
+      from sqlalchemy import create_engine
+      from sqlalchemy.ext.declarative import declarative_base
+      from sqlalchemy import Column, Integer, String
+      from sqlalchemy import Sequence
+      from sqlalchemy.orm import sessionmaker
+      
+      engine = create_engine("mysql+pymysql://root:root对应的密码@localhost:3306/company",echo=True)
+      Base = declarative_base()
+      
+      class User(Base):
+          __tablename__ = 'users'
+          id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+          name = Column(String(50))
+          fullname = Column(String(50))
+          password = Column(String(12))
+      
+      # 创建表
+      Base.metadata.create_all(engine)
+      
+      Session = sessionmaker(bind=engine)
+      session = Session()
+      
+      # 增
+      # ed_user = User(name='ed', fullname='Ed Jones', password='edspassword')
+      # session.add(ed_user)
+      # session.add_all([
+      #     User(name='wendy', fullname='Wendy Williams', password='foobar'),
+      #     User(name='mary', fullname='Mary Contrary', password='xxg527'),
+      #     User(name='fred', fullname='Fred Flinstone', password='blah')])
+      # session.commit()
+      
+      # 改
+      # our_user = session.query(User).filter_by(name='ed').first()
+      # our_user.name = 'ZhangEd'
+      # session.commit()
+      
+      #删除
+      
+      # user = session.query(User).filter_by(name="ZhangEd").first()
+      # session.delete(user)
+      # session.commit()
+      
+      #查
+      our_user = session.query(User).filter_by(name='mary').first()
+      print("our user's info:", our_user.name, our_user.id, our_user.password)
+      
+      
+      for instance in session.query(User).order_by(User.id):
+          print(instance.name, instance.fullname)
+  </pre>
+</body>
+</html>

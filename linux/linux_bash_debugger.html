@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>shell bash 调试技巧，使用bashdb</title>
+	<meta charset="utf-8" />
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<h1>如何调试shell脚本,使用bashdb即可</h>
+
+<pre>
+
+bash --debugger albumproject.sh
+
+如何查看一个变量:
+x $BASE_PATH
+
+n 执行下一条语句，遇到函数，不进入函数里面执行，将函数当作黑盒
+
+s n 单步执行n次，遇到函数进入函数里
+
+b 行号n 在行号n处设置断点
+
+c 行号n 一直执行到行号n处
+
+Finish 执行到程序最后
+
+cond n expr 条件断点
+
+</pre>
+
+</body>
+</html>

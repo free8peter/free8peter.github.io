@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>iOS 里面sigtrap的问题</title>
+	<meta charset="utf-8" />
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<h1>iOS 里面sigtrap的问题</h1>
+	<pre>
+
+SIGTRAP is not the error it is the exception. It doesn't show the origin of the crash. This exceptions throw into Main thread on Main/Next Runloop, so the stacktrace of the main thread does not show the origin of it.
+
+</pre>
+
+</body>
+
+</html>

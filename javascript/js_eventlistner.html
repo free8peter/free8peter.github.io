@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+	<pre>
+	window.addEventListener('error', e => {
+        console.log('error:', e);
+        global.myerror = e;
+    });
+</pre>
+    如果js发生脚本错误，那么错误会抛到这个函数里面, e是匿名函数的参数，后面就是函数体,es6写法。
+
+</body>
+</html>

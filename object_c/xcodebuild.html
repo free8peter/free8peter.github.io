@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>关于xcodebuild命令的使用</title>
+	<meta charset="utf-8" />
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<h1>xcodebuild命令的使用</h1>
+	<pre>
+xcodebuild -project albumsdk.xcodeproj -scheme albumsdk -destination 'platform=OS X,arch=x86_64'
+这个需要签名
+
+查看所有的模拟器
+xcodebuild -showsdks
+
+xcodebuild -sdk iphoneos11.1
+
+显示所有的 Targets, Build Configurations 命令
+xcodebuild -list
+
+注意： albumColorStaticLibrary 是 albumsdk.xcodeproj里面的一个静态库.a的
+xcodebuild -project albumsdk.xcodeproj -target albumColorStaticLibrary -configuration Debug
+xcodebuild -project albumsdk.xcodeproj -target albumColorStaticLibrary
+
+
+1.静态库的enable bitcode设置为NO
+2.静态库的build Active Architecture Only 设置为NO
+  这样做的目的是为了支持所有模拟器的CPU架构,不同模拟器的架构是不一样的,分别如下:
+  模拟器使用的CPU架构
+  iPhone4s-iPhone5 : i386
+  iPhone5s-iPhone6plus : x86_64
+
+  真机使用的CPU架构
+  iPhone3gs-iPhone4s : armv7
+  iPhone5-iPhone5c : armv7s
+  iPhone5s-iPhone6plus : arm64
+  唯一特殊:只要支持armv7的静态库可以在armv7s上正常运行
+
+  // 给iPhone 8模拟器创建一个静态库。
+  A:
+  xcodebuild -project albumsdk.xcodeproj -scheme albumColorStaticLibrary -destination 'platform=iOS Simulator,name=iPhone 8'
+  B:
+  xcodebuild -project albumsdk.xcodeproj -target albumColorStaticLibrary -destination 'platform=iOS Simulator,name=iPhone 8'
+  C:
+  xcodebuild -project albumsdk.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 8' -scheme albumColorStaticLibrary -derivedDataPath /Users/baidu/Desktop/use_xcodebuild_to_build_static_library/sdkdefaultpathere
+
+  D:
+  xcodebuild -project albumsdk.xcodeproj -scheme albumColorStaticLibrary  -derivedDataPath ./albumarchivedir
+  A和B的区别只是 A是scheme，所以建好之后，它会显示在原有工程的目录中，但是B是一个-target所以它不在原有工程目录中几乎，而是显示在跟.project同级的build文件夹下面
+
+  E: build会默认放到当前目录下面
+  xcodebuild -project BBAPods.xcodeproj -target BBAPods-Utility -configuration Release -sdk iphonesimulator VALID_ARCHS="i386 x86_64"
+
+  默认的构建缓存的路径，不指定默认   -derivedDataPath
+
+  给真机创建静态库
+  xcodebuild -project albumsdk.xcodeproj -target albumColorStaticLibrary -destination 'platform=iOS'
+
+  xcodebuild -project albumsdk.xcodeproj -target albumColorStaticLibrary -destination 'platform=iOS Simulator,name=iPhone 8' -configuration Debug
+  指定是Debug，因为是模拟器
+
+
+
+</pre>
+
+</body>
+
+</html>

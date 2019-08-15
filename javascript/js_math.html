@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<pre>
+
+
+// 前端代码，保留以为小数，使用了 Math
+    function formatNumber(n) {
+      var ret = n;
+      if (n > 1e8) {
+        ret = Math.floor(n / 1e8);
+        if (n % 1e8 >= 1e7) {
+          ret += '.' + Math.floor(n % 1e8 / 1e7);
+          ret += '亿'
+        }
+      } else if (n > 1e4) {
+        ret = Math.floor(n / 1e4);
+        if (n % 1e4 >= 1e3) {
+          ret += '.' + Math.floor(n % 1e4 / 1e4);
+          ret += '万'
+        }
+      } else {
+        ret = n;
+      }
+      return ret;
+    }
+
+    var number = 113456789;
+
+    alert(formatNumber(number));
+  
+</pre>
+
+</body>
+</html>
+

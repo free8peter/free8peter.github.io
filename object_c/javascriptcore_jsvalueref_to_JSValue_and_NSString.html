@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>javascriptcore一些东西</title>
+	<meta charset="utf-8" />
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<pre>
+  javascriptCore iOS里面可以使用C语言或者OC的api，如果是c的api，怎么来看好它的内容呢，比较简单。
+  
+
+    JSStringRef to NSString
+        JSStringRef name = JSStringCreateWithCFString((CFStringRef)key);
+        size_t realSize = JSStringGetLength(name);
+        char* utf8 = malloc(realSize);
+        JSStringGetUTF8CString(name, utf8, realSize);
+        NSString * nameString = [NSString stringWithUTF8String:utf8];
+        free(utf8);
+        NSLog(@"%@", nameString);
+
+    JSValueRef可以转为JSValue,这样就可以查看了用nslog
+     [JSValue valueWithJSValueRef:obj inContext:[JSContext contextWithJSGlobalContextRef:scriptView.jsGlobalContext]];
+</pre>
+
+</body>
+
+</html>

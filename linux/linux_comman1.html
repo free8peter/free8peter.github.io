@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>linux 的部分命令，目录，权限，添加目录，装包，比如装vsftpd</title>
+	<meta charset="utf-8" />
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<h1>linux 的部分命令，目录，权限，添加目录，装包，比如装vsftpd</h1>
+	<pre>
+    1.
+    linux 根目录 /
+	cd / 就进入了跟目录
+	2.查看所有的端口 netstat netstat -ntlp //查看当前所有tcp端口· netstat -ntulp |grep 80 //查看所有80端口使用情况· netstat -an | grep 3306 //查看所有3306端口使用情况·
+	3.打印当前目录 pwd print work directory
+
+	当前目录是 ./ 比如 ls ./ 但是跟目录是 /
+
+    可以查看所有用户的列表
+	cat /etc/passwd
+
+
+
+创建ftp服务
+1、查看Linux系统是否已经安装了vsftpd软件：rpm -qa|grep vsftpd；
+   注： RPM软件包管理器 文原义：RPM Package Manager（原Red Hat Package Manager，现在是一个递归缩写）linux包管理器
+
+2. 如果没有安装，那么安装 yum install -y vsftpd
+   注： Yum（全称为 Yellow dog Updater, Modified）是一个在Fedora和RedHat以及CentOS中的Shell前端软件包管理器。基于RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。
+   查看一个包的安装地址
+   whereis vsftpd
+
+
+   退出 nano,也就是出现了 向右的剪头，进入了nano编辑态，ctrl + z 即可。
+
+   列出包的信息 yum list vsftpd
+
+   退出vim，如果不好退出，那么 结合Shift键输入“:”，切换到命令模式，然后输入“wq”后回车。先保存后退出 write and quit
+           如果键入 q! 强制退出，不保存任何东西
+3.编辑配置文件vsftpd.conf
+
+cd /etc/vsftpd/
+
+cp vsftpd.conf vsftpd.conf.bak
+
+vim  vsftpd.conf
+
+做如下配置：
+
+“#anonymous_enable=YES” 改成 “anonymous_enable=NO”
+
+文件末尾新增：userlist_deny=NO
+
+说明：仅允许userlist的用户访问ftp服务器
+
+4.添加用户 useradd zhangjianftp
+  给用户设置密码 passwd zhangjianftp
+ vim /etc/vsftpd.user_list 在该文件末尾加上 zhangjianftp 这个用户
+
+5.重启ftp服务器
+  service vsftpd restart
+
+  测试ftp服务器是否已经开启
+  service vsftpd status
+
+
+ ls -l  查看文件夹下用户权限。
+  nmap 127.0.0.1  查看本机所有的端口
+
+
+  lsof -i :21
+  查看某一端口的占用情况
+
+
+  防火墙的状态
+   service iptables status
+
+移除一个文件夹
+rm -rf zhangjianftp
+
+
+查看所有端口命令
+netstat -antu
+其中-a表示查看所有状态的端口，默认只看连接的
+n表示显示数字端口号，而不显示名称，例如显示80而不是http
+t表示tcp端口
+u表示udp端口
+
+查看vsftpd的端口等
+netstat -tlpn | grep vsftpd
+
+
+注意：修改了vsftpd的默认端口号21，因为说是21是linux的默认端口号，所以得改。
+
+查看当前登录用户:
+ who
+
+ service httpd status
+ 查看目前apache状态
+   tip:Starting httpd: (2)No such file or directory: httpd: could not open error log file /etc/httpd/logs/error_log.
+	 创建这个文件即可
+
+	 重命名文件
+	 mv A B
+   mv welcome.conf welcome_changedname.conf
+	 mv 即可以重命名文件，也可以是文件夹
+
+	 注意：
+	 mv（英语：move）是类Unix操作系统中移动单个或多个文件或目录的命令。一般在移动操作之后，原来的文件或目录不能再次访问。移动后的文件名可以与原来相同（只要不与原文件在相同目录中），也可以不同。当需要移动的文件和新文件位于同一文件系统上时，mv命令只是将原始文件重命名来达到移动的效果。操作要求拥有需要被修改目录的写入权限。
+
+
+
+
+
+
+检查vsftp是否支持SSL
+ldd /usr/sbin/vsftpd | grep libssl
+
+
+	 </pre>
+
+
+</body>
+
+</html>
