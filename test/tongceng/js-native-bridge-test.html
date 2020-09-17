@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="//eopa.bdstatic.com/san/3.2.10/dist/san.min.js"></script>
+    <script src="./swan-4.js"></script>
+    <script type="text/javascript" src="//eopa.bdstatic.com/oapStatic/a5d24c4e368da3c4dd1a044b13be2edc.js"></script>
+</head>
+<body>
+    <div onclick="toWebPage()">跳回小程序web页面</div>
+    <div class="abc">111</div>
+    <div class="aaa">22</div>
+
+    <div onclick="album(false, '')">testing wk webpage, album message</div>
+</body>
+<script>
+
+    function toWebPage() {
+        swan.webView.navigateBack();
+        // setTimeout(function () {
+        //     document.querySelector('.abc').innerText = JSON.stringify(window.isNa);
+        //     document.querySelector('.aaa').innerText = JSON.stringify(window.bbb.filter(item => item.name.indexOf('postMessage') > -1));
+
+        // }, 3000)
+    }
+    function album(isCallback, jsonObj){
+        if (!isCallback) {
+            window.webkit.messageHandlers.album.postMessage({"ok":"value1"});
+        } else {
+            document.body.append(JSON.stringify(jsonObj));
+        }
+    }
+</script>
+</html>
