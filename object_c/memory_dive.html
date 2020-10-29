@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>iOS memory dive</title>
+	<meta charset="utf-8" />
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <h1>iOS memory dive</h1>
+  <div>
+    iOS 内存使用的工具<br/>
+    VMMAP<br/>
+    具体在命令行里面输入，即可，怎么用。<br/>
+    1.找pid progress id<br/>
+    首先跑起来Xcode, 之后点击Debug Memory Graph,之后File里export Memory Graph,这个时候可以看到文件里有一个中括号，中括号里面是progress id.<br/>
+    2.可以在打开苹果的原生应用活动监视器，之后可以找运行的应用的名称，后面的就是progress id.<br/>
+    3.终端里运行命令即可。vmmap --summary 49504<br/>
+    其中49504是progress id.<br/>
+    注意，这个进程必须是运行中的进程。<br/>
+
+    VIRTUAL means not real, means request, but not nessary using.<br/>
+    Dirty，iOS 内存有dirty和clean, 这个是可以想办法弄小点的。<br/>
+    swapped 说是dirty + compressed size 感觉这儿应该是减号。<br/>
+    找的话，需要找dirty size 比较大的地方。swapped 和compressed应该是关注的两栏。
+    stackoverflow: 
+    swapped size:It's the amount of your application's memory that has been paged out to disk to make room for other data.Unless your application is using a lot of memory, this should always be zero.
+    Virtual: dirty + clean
+    
+  </div>
+</body>
+
+</html>

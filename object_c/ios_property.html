@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>iOS 里面属性</title>
+	<meta charset="utf-8" />
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <h1>iOS 里面属性</h1>
+    <div>
+        @property(nonatomic, getter=gogoName, copy) NSString *name; <br/>
+        @property(nonatomic, setter=gogoAge:, copy) NSString *age;<br/>
+
+- (NSString *)gogoName {<br/>
+    return _name;<br/>
+}<br/>
+
+- (void)gogoAge:(NSString *)age {<br/>
+    // self.age = age; // 会发生死循环<br/>
+    _age = age;<br/>
+}<br/>
+
+属性的括号里写，getter=...; setter=...相当于指定了setter和getter方法，写self.name= 的时候，原来的setter 方法不再生效。相当于替换了原来的getter setter方法
+
+    </div>
+
+</body>
+
+</html>
